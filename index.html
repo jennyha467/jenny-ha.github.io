@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quynh Anh Ha — Jenny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F9F6F1;
+    --sand: #EDE8DF;
+    --stone: #C8BFB0;
+    --ink: #1C1C1A;
+    --muted: #7A7670;
+    --accent: #B5593A;
+    --light-accent: #F0E8E4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(249,246,241,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 8rem;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-bio {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 400px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.3rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+
+  .hero-right {
+    background: var(--sand);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 4rem 3rem 0;
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 1.2s ease both;
+  }
+
+  .hero-card {
+    background: var(--cream);
+    border: 1px solid var(--stone);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 380px;
+    margin-bottom: 4rem;
+  }
+
+  .hero-card-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .hero-stat:last-child { border-bottom: none; }
+
+  .stat-label { font-size: 0.8rem; color: var(--muted); }
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 7rem 8rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--stone);
+    margin-left: 1rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--cream); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .about-details { display: flex; flex-direction: column; gap: 2rem; }
+
+  .detail-item {}
+  .detail-item .detail-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .detail-item .detail-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--sand); }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--stone);
+    position: relative;
+  }
+
+  .exp-item:first-child { border-top: 1px solid var(--stone); }
+
+  .exp-meta {}
+
+  .exp-date {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .exp-type {
+    font-size: 0.7rem;
+    color: var(--stone);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  .exp-content {}
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--stone);
+    font-size: 0.7rem;
+    top: 0.15rem;
+  }
+
+  /* HOBBIES */
+  #hobbies { background: var(--cream); }
+
+  .hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hobby-card {
+    background: var(--sand);
+    border: 1px solid var(--stone);
+    padding: 2.5rem 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hobby-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(28,28,26,0.06);
+  }
+
+  .hobby-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .hobby-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+  }
+
+  .hobby-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .hobby-places {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .place-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--light-accent);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(181,89,58,0.15);
+  }
+
+  /* CONTACT */
+  #contact { background: var(--ink); color: var(--cream); }
+
+  #contact .section-title { color: var(--cream); }
+  #contact .section-num { color: var(--accent); }
+  #contact .section-line { background: rgba(249,246,241,0.15); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  .contact-details { display: flex; flex-direction: column; gap: 2rem; }
+
+  .contact-item .contact-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-item .contact-value {
+    font-size: 1rem;
+    color: var(--sand);
+  }
+
+  .contact-item a {
+    color: var(--sand);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,191,176,0.3);
+    transition: border-color 0.2s;
+  }
+
+  .contact-item a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(200,191,176,0.1);
+    padding: 2rem 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    .hero-right { min-height: 300px; padding: 2rem 2rem 0; }
+    section { padding: 4rem 2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .hobbies-grid { grid-template-columns: 1fr; }
+    footer { padding: 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Quynh Anh Ha</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#hobbies">Hobbies</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="opacity:1;transform:none;padding:0;padding-top:80px;">
+  <div class="hero-left">
+    <p class="hero-tag">Transport & Logistics Professional</p>
+    <h1 class="hero-name">Quynh Anh Ha<br><em>(Jenny)</em></h1>
+    <p class="hero-subtitle">Transport Allocator · Melbourne, AU</p>
+    <p class="hero-bio">A driven logistics and customer experience professional with a passion for solving problems, building relationships, and making things move — both in supply chains and in life.</p>
+    <a href="#contact" class="hero-cta">Get in touch →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <p class="hero-card-label">At a glance</p>
+      <div class="hero-stat">
+        <span class="stat-label">Current Role</span>
+        <span class="stat-value">Transport Allocator</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-label">Company</span>
+        <span class="stat-value">Ofload</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-label">Based in</span>
+        <span class="stat-value">Melbourne, AU</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-label">Background</span>
+        <span class="stat-value">Vietnamese-Australian</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-label">Experience</span>
+        <span class="stat-value">3+ Years</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Hi, I'm <strong>Jenny</strong> — a logistics and customer experience professional based in Melbourne, Australia. Originally from Vietnam, I've built a career around <strong>connecting people, carriers, and freight</strong> with care and precision.</p>
+      <p>I thrive in fast-paced environments where problem-solving and clear communication make the difference. From allocating freight at Ofload to handling customer queries at SONIQ Logistics, I bring a customer-first mindset to everything I do.</p>
+      <p>Outside of work, I'm a curious explorer — whether that's discovering a new city, vlogging a day trip, or learning about the cultures that make our world so beautifully diverse.</p>
+    </div>
+    <div class="about-details">
+      <div class="detail-item">
+        <p class="detail-label">Languages</p>
+        <p class="detail-value">Vietnamese, English</p>
+      </div>
+      <div class="detail-item">
+        <p class="detail-label">Location</p>
+        <p class="detail-value">Melbourne, Victoria, Australia</p>
+      </div>
+      <div class="detail-item">
+        <p class="detail-label">Industries</p>
+        <p class="detail-value">Logistics · Supply Chain · Retail · Customer Service</p>
+      </div>
+      <div class="detail-item">
+        <p class="detail-label">Key Strengths</p>
+        <p class="detail-value">Carrier Relations · Customer Communication · Problem Solving · Operations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Jun 2025 — Present</p>
+        <p class="exp-company">Ofload</p>
+        <p class="exp-type">Full-time · On-site</p>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Transport Allocator</h3>
+        <ul class="exp-bullets">
+          <li>Understand and anticipate customer needs to ensure a high level of customer satisfaction</li>
+          <li>Proactively communicate with customers to provide shipment updates and gather feedback</li>
+          <li>Build and maintain strong relationships with carriers to ensure reliable and efficient transportation</li>
+          <li>Negotiate rates, terms, and conditions with carriers to optimise cost and service levels</li>
+          <li>Identify and address issues in the transportation process promptly and effectively</li>
+          <li>Collaborate with cross-functional teams to implement solutions and prevent recurrence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Dec 2024 — May 2025</p>
+        <p class="exp-company">Quatius Aust Pty Ltd</p>
+        <p class="exp-type">Full-time → Part-time</p>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Outbound Administrator — SONIQ Logistics</h3>
+        <ul class="exp-bullets">
+          <li>Handled incoming calls, emails and outbound calls from customers</li>
+          <li>Responded to inquiries about orders, products, deliveries, and services</li>
+          <li>Processed orders, packing slips, and freight bookings</li>
+          <li>Communicated frequently with operations and management teams</li>
+          <li>Achieved KPI targets including average handling time and queue management</li>
+          <li>Updated and maintained records of all customer interactions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Oct 2023 — Present</p>
+        <p class="exp-company">Rebel Sport</p>
+        <p class="exp-type">Part-time · On-site</p>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Retail Team Member</h3>
+        <ul class="exp-bullets">
+          <li>Contributed to store sales targets by maximising sales opportunities and GP%</li>
+          <li>Delivered friendly, helpful and accurate customer service and advice</li>
+          <li>Maintained merchandise presentation and displays to store standards</li>
+          <li>Processed lay-bys, special orders, returns and refunds efficiently</li>
+          <li>Followed all operating procedures for POS, EFTPOS, PDT and stock receiving</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Jul 2023 — Oct 2023</p>
+        <p class="exp-company">Repertoire Culinaire</p>
+        <p class="exp-type">Internship · On-site</p>
+      </div>
+      <div class="exp-content">
+        <h3 class="exp-role">Junior Warehouse / Supply Chain Associate</h3>
+        <ul class="exp-bullets">
+          <li>Gained hands-on experience in warehouse management and international supply chain</li>
+          <li>Practiced shipment inbound reception and outbound preparation including merchandise</li>
+          <li>Worked within a global food distribution company spanning UK, Italy, UAE, Asia and Australia</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Beyond Work</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="hobbies-grid">
+
+    <div class="hobby-card">
+      <div class="hobby-icon">✈️</div>
+      <h3 class="hobby-title">Travelling</h3>
+      <p class="hobby-desc">There's nothing quite like experiencing a new place — its food, its people, its energy. Travel has shaped who I am and how I see the world.</p>
+      <div class="hobby-places">
+        <span class="place-tag">Vietnam</span>
+        <span class="place-tag">Australia</span>
+        <span class="place-tag">USA</span>
+        <span class="place-tag">South Korea</span>
+        <span class="place-tag">Singapore</span>
+      </div>
+    </div>
+
+    <div class="hobby-card">
+      <div class="hobby-icon">🗺️</div>
+      <h3 class="hobby-title">Day Trips</h3>
+      <p class="hobby-desc">You don't need a passport to explore. I love discovering hidden gems close to home — new neighbourhoods, scenic drives, and spontaneous adventures around Melbourne and beyond.</p>
+    </div>
+
+    <div class="hobby-card">
+      <div class="hobby-icon">🎥</div>
+      <h3 class="hobby-title">Vlogging & Photography</h3>
+      <p class="hobby-desc">Capturing moments is my way of holding on to them and sharing them with others. Through photos and vlogs, I document the beauty in everyday life and the places I explore.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">"Let's connect — whether it's work, travel tips, or just a friendly chat."</p>
+    </div>
+    <div class="contact-details">
+      <div class="contact-item">
+        <p class="contact-label">Phone</p>
+        <p class="contact-value"><a href="tel:0434064656">0434 064 656</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">Location</p>
+        <p class="contact-value">Melbourne, Victoria, Australia</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">Availability</p>
+        <p class="contact-value">Open to new opportunities</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Quynh Anh Ha (Jenny)</span>
+  <span>Melbourne, Australia</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section:not(.hero)').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
